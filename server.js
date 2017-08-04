@@ -54,8 +54,7 @@ app.route('/api/imagesearch/:search')
       }
       
       var results = imageSearch(searchTerm, function callback(results) {
-        
-        mongoose.connect(url)
+      
         
         var newSearch = RecentSearch({
               search_term: searchTerm
@@ -75,12 +74,15 @@ app.route('/api/imagesearch/:search')
 
 app.route('/api/latest/imagesearch')
   .get(function(req, res) {
+    
+    var query = RecentSearch.findOne({ _id: 1 })
+    query.select('search_term')
   
-    RecentSearch.find({}, 'search_term', function (err, person) {
-      if (err) rconsole.log(err);
-      console.log('%s %s is a %s.', person.name.first, person.name.last, person.occupation) // Space Ghost is a talk show host.
+    query.exec(function (err, RecentSearch) {
+      if (err) console.log(err)
+      console.log(RecentSearch.search_term)
     })
-  
+    
   })
 
 // Respond not found to all the wrong routes

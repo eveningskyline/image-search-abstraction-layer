@@ -73,10 +73,13 @@ app.route('/api/imagesearch/:search')
 		
     })
 
-app.route('/api/recent_searches')
+app.route('/api/latest/imagesearch')
   .get(function(req, res) {
   
-    
+    RecentSearch.find({}, 'search_term', function (err, person) {
+      if (err) rconsole.log(err);
+      console.log('%s %s is a %s.', person.name.first, person.name.last, person.occupation) // Space Ghost is a talk show host.
+    })
   
   })
 

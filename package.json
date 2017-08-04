@@ -1,17 +1,21 @@
 {
-	"name": "fcc-learn-npm-package-json",
-	"dependencies": {
-		"express": "^4.14.0"
-	},
-	"main": "server.js",
-	"scripts": {
-		"start": "node server.js"
-	},
-	"engines": {
-		"node": "4.4.5"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://idontknow/todo.git"
-	}
+  "name": "image-search-abstraction-layer",
+  "dependencies": {
+    "express": "^4.15.3",
+    "google-images": "^2.1.0"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "4.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eveningskyline/image-search-abstraction-layer.git"
+  }
+}git",
+    "url": "https://idontknow/todo.git"
+  }
 }

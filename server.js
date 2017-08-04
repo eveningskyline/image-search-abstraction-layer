@@ -45,7 +45,7 @@ app.route('/api/imagesearch/:searchTerm')
   
       var results = imageSearch('test', function callback(results) {
         res.send(results)
-      }, 0, 5)
+      }, 0, 10)
 
 		
     })

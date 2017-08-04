@@ -40,12 +40,19 @@ app.route('/')
     })
 
 
-app.route('/api/imagesearch/:searchTerm')
+app.route('/api/imagesearch/:search')
     .get(function(req, res) {
-  
-      var results = imageSearch('test', function callback(results) {
+      var search = req.params.search.split("?")
+      var searchTerm = search[0]
+      var offset = 0
+      
+      if (req.query.offset && req.query.offset != 0) {
+        offset = req.query.offset;
+      }
+      
+      var results = imageSearch(searchTerm, function callback(results) {
         res.send(results)
-      }, 0, 10)
+      }, offset, 10)
 
 		
     })

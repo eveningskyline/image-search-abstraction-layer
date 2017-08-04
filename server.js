@@ -8,6 +8,8 @@
 var fs = require('fs');
 var express = require('express');
 var app = express();
+//const GoogleImages = require('google-images');
+//const client = new GoogleImages(process.env.CSE_ID, process.env.API_KEY);
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
@@ -37,6 +39,7 @@ app.route('/')
     .get(function(req, res) {
 		  res.sendFile(process.cwd() + '/views/index.html');
     })
+
 
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){

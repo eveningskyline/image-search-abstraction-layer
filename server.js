@@ -8,12 +8,12 @@
 var fs = require('fs');
 var express = require('express');
 var app = express();
-//const GoogleImages = require('google-images');
-//const client = new GoogleImages(process.env.CSE_ID, process.env.API_KEY);
+const GoogleImages = require('google-images');
+const client = new GoogleImages(process.env.CSE_ID, process.env.API_KEY);
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
-    var allowedOrigins = ['https://narrow-plane.gomix.me', 'https://www.freecodecamp.com'];
+    var allowedOrigins = ['https://first-kitty.glitch.me', 'https://www.freecodecamp.com'];
     var origin = req.headers.origin || '*';
     if(!process.env.XORIG_RESTRICT || allowedOrigins.indexOf(origin) > -1){
          console.log(origin);
@@ -38,6 +38,15 @@ app.route('/_api/package.json')
 app.route('/')
     .get(function(req, res) {
 		  res.sendFile(process.cwd() + '/views/index.html');
+    })
+
+
+app.route('/api/imagesearch/:searchTerm')
+    .get(function(req, res) {
+  
+      var images = client.search('test');
+
+		  res.send(images)
     })
 
 

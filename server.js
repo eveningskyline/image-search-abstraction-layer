@@ -8,8 +8,7 @@
 var fs = require('fs');
 var express = require('express');
 var app = express();
-const GoogleImages = require('google-images');
-const client = new GoogleImages(process.env.CSE_ID, process.env.API_KEY);
+var imageSearch = require('node-google-image-search');
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
@@ -44,9 +43,11 @@ app.route('/')
 app.route('/api/imagesearch/:searchTerm')
     .get(function(req, res) {
   
-      var images = client.search('test');
+      var results = imageSearch('test', function callback(results) {
+        res.send(results)
+      }, 0, 5)
 
-		  res.send(images)
+		
     })
 
 

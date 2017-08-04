@@ -2,7 +2,7 @@
   "name": "image-search-abstraction-layer",
   "dependencies": {
     "express": "^4.15.3",
-    "google-images": "^2.1.0"
+    "node-google-image-search": "^1.0.3"
   },
   "main": "server.js",
   "scripts": {

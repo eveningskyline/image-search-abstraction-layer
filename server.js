@@ -11,7 +11,6 @@ var app = express();
 var imageSearch = require('node-google-image-search');
 var url = process.env.MONGOLAB_URI;
 var mongoose = require('mongoose');
-// grab the url model
 var RecentSearch = require('./models/recent_searches');
 
 if (!process.env.DISABLE_XORIGIN) {
@@ -56,16 +55,17 @@ app.route('/api/imagesearch/:search')
       
       var results = imageSearch(searchTerm, function callback(results) {
         
-        mongoose.connect(url);
+        mongoose.connect(url)
         
         var newSearch = RecentSearch({
               search_term: searchTerm
-            });
-        // save the new link
+        })
+        
         newSearch.save(function(err) {
           if (err){
             console.log(err);
           }
+        })
         
         res.send(results)
       }, offset, 10)

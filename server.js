@@ -9,6 +9,10 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 var imageSearch = require('node-google-image-search');
+var url = process.env.MONGOLAB_URI;
+var mongoose = require('mongoose');
+// grab the url model
+var RecentSearch = require('./models/recent_searches');
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
@@ -51,12 +55,30 @@ app.route('/api/imagesearch/:search')
       }
       
       var results = imageSearch(searchTerm, function callback(results) {
+        
+        mongoose.connect(url);
+        
+        var newSearch = RecentSearch({
+              search_term: searchTerm
+            });
+        // save the new link
+        newSearch.save(function(err) {
+          if (err){
+            console.log(err);
+          }
+        
         res.send(results)
       }, offset, 10)
 
 		
     })
 
+app.route('/api/recent_searches')
+  .get(function(req, res) {
+  
+    
+  
+  })
 
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){
